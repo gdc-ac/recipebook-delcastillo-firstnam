@@ -9,9 +9,8 @@
     <body>
         <h2>{{ name }}</h2>
         <h3>Ingredients:</h3>
-        {% for ingredient in ingredients %}
-            <li>{{ ingredient.name }}: {{ ingredient.quantity }}</li>
+        {% for ingredient in object.ingredients.all %}
+            <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
         {% endfor %}
-        <h3>Link - {{ link }}</h3>
     </body>
 </html>
