@@ -5,12 +5,26 @@
     </head>
     <header>
         <h1>Recipe Book</h1>
+        <h2><i>Hello, {{ request.user.username }}!</i></h2>
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit">LOG OUT</button>
+        </form>
     </header>
     <body>
         <h2>{{ name }}</h2>
+
+        <h4><i>By: {{object.author.name}}</i></h4>
+
         <h3>Ingredients:</h3>
         {% for ingredient in object.ingredients.all %}
             <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
         {% endfor %}
+        <br>
+
+        <small>Created on: {{ object.created_on }}</small>
+        <br>
+        
+        <small>Last updated: {{ object.updated_on }}</small>
     </body>
 </html>
