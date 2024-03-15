@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <title>Recipe Book</title>
-    </head>
-    <header>
-        <h1>Recipe Book</h1>
+    {% extends 'base.html' %}
+        
+    {% block title %}Recipe List{% endblock title %}
+    
+    {% block content %}
         {% if request.user.is_authenticated %}
             <h2><i>Hello, {{ request.user.username }}!</i></h2>
             <form action="{% url 'logout' %}" method="POST">
@@ -14,8 +14,7 @@
         {% else %}
             <h3><i>Please <a href="{% url 'login' %}">log-in</a> to view the recipes!</i></h3>
         {% endif %}
-    </header>
-    <body>
+        
         <h3>List of Recipes:</h3>
         {% for recipe in object_list %}  
             <h4>  
@@ -26,5 +25,5 @@
             </li>
             </h4>
         {% endfor %}
-    </body>
+    {% endblock content %}
 </html>
