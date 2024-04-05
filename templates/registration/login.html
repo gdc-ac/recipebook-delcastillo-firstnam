@@ -1,15 +1,13 @@
-<!DOCTYPE html>
-<html>
-    {% extends 'base.html' %}
-        
-    {% block title %}Recipe Book{% endblock title %}
+{% extends 'base.html' %}
+{% load static %}
     
-    {% block content %}
-        <a href = "{% url 'password_reset' %}">I forgot my password</a>
-        <form method="POST">
-            {% csrf_token %} <!-- Cross-site Request Forgery -->
-            {{ form.as_p }}
-            <button type="submit">Login</button>
-        </form>
-    {% endblock content %}
-</html>
+{% block title %}Recipe Book{% endblock title %}
+
+{% block content %}
+    <a href = "{% url 'password_reset' %}">I forgot my password</a>
+    <form method="POST">
+        {% csrf_token %} <!-- Cross-site Request Forgery -->
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+{% endblock content %}
