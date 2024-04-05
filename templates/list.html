@@ -1,29 +1,17 @@
-<!DOCTYPE html>
-<html>
-    {% extends 'base.html' %}
-        
-    {% block title %}Recipe List{% endblock title %}
-    
-    {% block content %}
-        {% if request.user.is_authenticated %}
-            <h2><i>Hello, {{ request.user.username }}!</i></h2>
-            <form action="{% url 'logout' %}" method="POST">
-                {% csrf_token %}
-                <button type="submit">LOG OUT</button>
-            </form>
-        {% else %}
-            <h3><i>Please <a href="{% url 'login' %}">log-in</a> to view the recipes!</i></h3>
-        {% endif %}
-        
-        <h3>List of Recipes:</h3>
-        {% for recipe in object_list %}  
-            <h4>  
+{% extends 'base.html' %}
+{% load static %}  
+{% block title %}Recipe List{% endblock title %}
+
+{% block content %}
+    <h3>List of Recipes:</h3>
+    {% for recipe in object_list %}  
+        <h4>  
             <li>
                 <a href = "{{ recipe.get_absolute_url }}">
                     {{ recipe }}
                 </a>
             </li>
-            </h4>
-        {% endfor %}
-    {% endblock content %}
-</html>
+        </h4>
+    {% endfor %}
+    <h3><a href = "{{ '../recipe/add' }}">Add a recipe!</a></h3>
+{% endblock content %}
