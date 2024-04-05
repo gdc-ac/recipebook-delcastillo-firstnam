@@ -1,30 +1,31 @@
-<!DOCTYPE html>
-<html>
-    {% extends 'base.html' %}
-        
-    {% block title %}Recipe Detail{% endblock title %}
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block title %}Recipe Detail{% endblock title %}
+
+{% block content %}
+    <h2>{{ object }}</h2>
+
+    {% for image in recipe.images.all %}
+        <img src="{{ image.image.url }}" alt="{{ image.description }}" width="500px">
+    {% endfor %}
+    <br>
+    <a href="{% url 'ledger:recipe-detail-addimage' pk=recipe.pk %}">Add an Image to this recipe!</a>
     
-    {% block content %}
-        <h2><i>Hello, {{ request.user.username }}!</i></h2>
-        <form action="{% url 'logout' %}" method="POST">
-            {% csrf_token %}
-            <button type="submit">LOG OUT</button>
-        </form>
 
-        <h2>{{ name }}</h2>
+    <h4><i>By: {{object.author.name}}</i></h4>
 
-        <h4><i>By: {{object.author.name}}</i></h4>
+    <h3>Ingredients:</h3>
+    {% for ingredient in object.ingredients.all %}
+        <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
+    {% endfor %}
+    <br>
 
-        <h3>Ingredients:</h3>
-        {% for ingredient in object.ingredients.all %}
-            <li>{{ ingredient.ingredient.name }}: {{ ingredient.quantity }}</li>
-        {% endfor %}
-        <br>
+    <small>Created on: {{ object.created_on }}</small>
+    <br>
+    
+    <small>Last updated: {{ object.updated_on }}</small>
 
-        <small>Created on: {{ object.created_on }}</small>
-        <br>
-        
-        <small>Last updated: {{ object.updated_on }}</small>
+{% endblock content %}
 
-    {% endblock content %}
-</html>
