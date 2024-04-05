@@ -1,6 +1,7 @@
-from accounts.models import Profile
 from django.db import models
 from django.urls import reverse
+
+from accounts.models import Profile
 
 
 class Ingredient(models.Model):
@@ -38,4 +39,12 @@ class RecipeIngredient(models.Model):
 
     recipe = models.ForeignKey(
         Recipe, on_delete=models.CASCADE, related_name="ingredients", default=1
+    )
+
+
+class RecipeImage(models.Model):
+    image = models.ImageField(upload_to="images/", default=None)
+    description = models.CharField(max_length=255)
+    recipe = models.ForeignKey(
+        Recipe, on_delete=models.CASCADE, related_name="images", default=1
     )
