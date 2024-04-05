@@ -1,15 +1,19 @@
 from django.contrib import admin
 
-from .models import Recipe, RecipeIngredient
+from .models import Recipe, RecipeImage, RecipeIngredient
 
 
-class RecipeIngInline(admin.TabularInline):
+class RecipeIngrInline(admin.TabularInline):
     model = RecipeIngredient
+
+
+class RecipeImgInline(admin.TabularInline):
+    model = RecipeImage
 
 
 class RecipeAdmin(admin.ModelAdmin):
     model = Recipe
-    inlines = [RecipeIngInline]
+    inlines = [RecipeIngrInline, RecipeImgInline]
 
 
 admin.site.register(Recipe, RecipeAdmin)
